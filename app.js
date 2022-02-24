@@ -1,5 +1,5 @@
 const express = require("express");
-const { default: send_message } = require("./send");
+const { send_message } = require("./send");
 const app = express();
 const port = 3000;
 

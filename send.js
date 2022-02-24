@@ -3,7 +3,7 @@ const axios = require("axios");
 
 require("dotenv").config();
 
-function send_message(phone, password) {
+exports.send_message = function send_message(phone, password) {
     var user_phone_number = phone; //수신 전화번호 기입
     var resultCode = 404;
     const date = Date.now().toString();
@@ -30,15 +30,14 @@ function send_message(phone, password) {
 
     axios({
         method: method,
-        uri: url,
-        json: true,
+        url: url,
         headers: {
             "Contenc-type": "application/json; charset=utf-8",
             "x-ncp-iam-access-key": accessKey,
             "x-ncp-apigw-timestamp": date,
             "x-ncp-apigw-signature-v2": signature,
         },
-        body: {
+        data: {
             type: "SMS",
             countryCode: "82",
             from: "01084770706",
@@ -55,6 +54,4 @@ function send_message(phone, password) {
             console.log(error);
         });
     return resultCode;
-}
-
-export default send_message;
+};
